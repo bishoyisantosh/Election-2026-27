@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { BOY_CANDIDATES, GIRL_CANDIDATES, SCHOOL_INFO } from './data';
 import Clock from './components/Clock';
 import PanelSection from './components/PanelSection';
@@ -8,8 +8,9 @@ import AdminDashboard from './components/AdminDashboard';
 import { db } from './firebase';
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 
-function App() {
-  const [isAdmin, setIsAdmin] = useState(window.location.pathname === '/admin');
+import { Routes, Route } from 'react-router-dom';
+
+function StudentVoting() {
   const [boyVote, setBoyVote] = useState<number | null>(null);
   const [girlVote, setGirlVote] = useState<number | null>(null);
   const [showModal, setShowModal] = useState(false);
@@ -17,19 +18,6 @@ function App() {
   const [notification, setNotification] = useState<string | null>(null);
   const [votesCast, setVotesCast] = useState(0);
   const [isSubmitting, setIsSubmitting] = useState(false);
-
-  useEffect(() => {
-    const handleLocationChange = () => {
-      setIsAdmin(window.location.pathname === '/admin');
-    };
-    // Listen to popstate event
-    window.addEventListener('popstate', handleLocationChange);
-    return () => window.removeEventListener('popstate', handleLocationChange);
-  }, []);
-
-  if (isAdmin) {
-    return <AdminDashboard />;
-  }
 
   const selectedBoy = BOY_CANDIDATES.find((c) => c.id === boyVote) || null;
   const selectedGirl = GIRL_CANDIDATES.find((c) => c.id === girlVote) || null;
@@ -41,14 +29,67 @@ function App() {
     setTimeout(() => setNotification(null), 3000);
   };
 
+  // Helper to play short beep sound when candidate is selected (sine wave, 1000Hz, 0.1s)
+  const playSelectionBeep = () => {
+    try {
+      const AudioCtx = window.AudioContext || (window as any).webkitAudioContext;
+      if (!AudioCtx) return;
+      const ctx = new AudioCtx();
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(1000, ctx.currentTime);
+
+      gain.gain.setValueAtTime(0.12, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.1);
+
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+
+      osc.start();
+      osc.stop(ctx.currentTime + 0.1);
+    } catch (e) {
+      console.warn("Web Audio selection beep blocked or not supported:", e);
+    }
+  };
+
+  // Helper to play longer buzz beep sound when vote is submitted (sine wave, 850Hz, 1.2s)
+  const playSubmitBeep = () => {
+    try {
+      const AudioCtx = window.AudioContext || (window as any).webkitAudioContext;
+      if (!AudioCtx) return;
+      const ctx = new AudioCtx();
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(850, ctx.currentTime); // Real EVM buzzer sound frequency
+
+      gain.gain.setValueAtTime(0.25, ctx.currentTime);
+      gain.gain.setValueAtTime(0.25, ctx.currentTime + 1.1);
+      gain.gain.linearRampToValueAtTime(0.01, ctx.currentTime + 1.2);
+
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+
+      osc.start();
+      osc.stop(ctx.currentTime + 1.2);
+    } catch (e) {
+      console.warn("Web Audio submit beep blocked or not supported:", e);
+    }
+  };
+
   const handleBoyVote = (id: number) => {
     setBoyVote(id);
+    playSelectionBeep();
     const c = BOY_CANDIDATES.find((x) => x.id === id);
     if (c) showNotif(`✅ Head Boy: ${c.name} selected`);
   };
 
   const handleGirlVote = (id: number) => {
     setGirlVote(id);
+    playSelectionBeep();
     const c = GIRL_CANDIDATES.find((x) => x.id === id);
     if (c) showNotif(`✅ Head Girl: ${c.name} selected`);
   };
@@ -93,6 +134,7 @@ function App() {
         timestamp: serverTimestamp(),
       });
 
+      playSubmitBeep();
       setShowModal(false);
       setShowSuccess(true);
       setVotesCast((prev) => prev + 1);
@@ -467,6 +509,15 @@ function App() {
         />
       )}
     </div>
+  );
+}
+
+function App() {
+  return (
+    <Routes>
+      <Route path="/" element={<StudentVoting />} />
+      <Route path="/admin" element={<AdminDashboard />} />
+    </Routes>
   );
 }
 
