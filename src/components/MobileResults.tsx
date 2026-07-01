@@ -109,7 +109,7 @@ export default function MobileResults() {
         /* Absolute positioned card wrapper for smooth sliding list animations */
         .list-container {
           position: relative;
-          height: ${BOY_CANDIDATES.length * 122}px;
+          height: ${BOY_CANDIDATES.length * 148}px;
           margin-top: 10px;
         }
 
@@ -117,7 +117,7 @@ export default function MobileResults() {
           position: absolute;
           left: 0;
           right: 0;
-          height: 110px;
+          height: 132px;
           transition: transform 0.45s cubic-bezier(0.23, 1, 0.32, 1), border-color 0.45s ease, box-shadow 0.45s ease;
         }
 
@@ -213,21 +213,21 @@ export default function MobileResults() {
                   <div
                     key={cand.id}
                     className="animated-card"
-                    style={{ transform: `translateY(${cardIndex * 122}px)` }}
+                    style={{ transform: `translateY(${cardIndex * 148}px)` }}
                   >
                     <div
-                      className={`h-full bg-slate-900/60 border rounded-2xl p-4 flex items-center justify-between gap-4 ${
-                        isLeader ? 'leader-glow border-yellow-500/50' : 'border-cyan-500/10'
+                      className={`h-full bg-slate-900/60 border rounded-3xl p-5 flex items-center justify-between gap-5 ${
+                        isLeader ? 'leader-glow border-yellow-500/50 shadow-[0_0_20px_rgba(234,179,8,0.15)]' : 'border-cyan-500/10'
                       }`}
                     >
                       {/* Left: Rank Badge */}
-                      <div className="flex flex-col items-center justify-center flex-shrink-0 min-w-[28px]">
+                      <div className="flex flex-col items-center justify-center flex-shrink-0 min-w-[40px]">
                         {isLeader ? (
-                          <span className="text-yellow-400 text-xl animate-bounce" title="Leader">👑</span>
+                          <span className="text-yellow-400 text-2xl animate-bounce mb-1" title="Leader">👑</span>
                         ) : null}
                         <span
-                          className={`font-black font-orbitron text-base ${
-                            isLeader ? 'text-yellow-400 font-extrabold' : 'text-gray-500'
+                          className={`font-black font-orbitron text-xl ${
+                            isLeader ? 'text-yellow-400 font-black' : 'text-gray-500'
                           }`}
                         >
                           #{idx + 1}
@@ -235,7 +235,7 @@ export default function MobileResults() {
                       </div>
 
                       {/* Photo */}
-                      <div className="w-[60px] h-[60px] rounded-xl overflow-hidden border border-cyan-500/20 bg-slate-950/80 flex-shrink-0 relative">
+                      <div className="w-[75px] h-[75px] rounded-2xl overflow-hidden border-2 border-cyan-500/20 bg-slate-950/80 flex-shrink-0 relative shadow-[0_4px_10px_rgba(0,0,0,0.3)]">
                         <img
                           src={cand.photo}
                           alt={cand.name}
@@ -245,7 +245,7 @@ export default function MobileResults() {
                             target.style.display = 'none';
                             const parent = target.parentElement;
                             if (parent) {
-                              parent.innerHTML = `<div class="w-full h-full flex items-center justify-center text-xl bg-cyan-950/30">${cand.symbol}</div>`;
+                              parent.innerHTML = `<div class="w-full h-full flex items-center justify-center text-2xl bg-cyan-950/30">${cand.symbol}</div>`;
                             }
                           }}
                         />
@@ -253,20 +253,20 @@ export default function MobileResults() {
 
                       {/* Details */}
                       <div className="flex-1 min-w-0">
-                        <h4 className="font-extrabold text-base uppercase tracking-wide truncate text-gray-100 font-orbitron mb-1">
+                        <h4 className="font-black text-xl uppercase tracking-wide truncate text-gray-100 font-orbitron mb-1.5 leading-none">
                           {cand.name}
                         </h4>
-                        <div className="flex items-center gap-2">
+                        <div className="flex items-center gap-2.5">
                           {cand.symbolImage ? (
                             <img
                               src={cand.symbolImage}
                               alt={cand.symbolLabel}
-                              className="w-8 h-8 rounded-full border border-cyan-500/40 object-cover"
+                              className="w-[45px] h-[45px] rounded-full border-2 border-cyan-500/40 object-cover bg-slate-950"
                             />
                           ) : (
-                            <span className="text-sm">{cand.symbol}</span>
+                            <span className="text-lg">{cand.symbol}</span>
                           )}
-                          <span className="text-[11px] font-bold text-cyan-400 font-rajdhani uppercase tracking-wider">
+                          <span className="text-[12px] font-extrabold text-cyan-400 font-rajdhani uppercase tracking-widest">
                             {cand.symbolLabel}
                           </span>
                         </div>
@@ -274,13 +274,13 @@ export default function MobileResults() {
 
                       {/* Right: Votes Counter */}
                       <div className="text-right flex-shrink-0 pl-2">
-                        <div className={`font-black font-orbitron text-3xl ${
+                        <div className={`font-black font-orbitron text-4xl leading-none ${
                           isLeader ? 'text-yellow-400' : 'text-cyan-400'
                         }`}>
                           {cand.votes}
                         </div>
-                        <div className="text-[9px] font-bold text-gray-500 font-orbitron uppercase tracking-wider">
-                          votes
+                        <div className="text-[10px] font-black text-gray-500 font-orbitron uppercase tracking-widest mt-1">
+                          VOTES
                         </div>
                       </div>
                     </div>
@@ -305,21 +305,21 @@ export default function MobileResults() {
                   <div
                     key={cand.id}
                     className="animated-card"
-                    style={{ transform: `translateY(${cardIndex * 122}px)` }}
+                    style={{ transform: `translateY(${cardIndex * 148}px)` }}
                   >
                     <div
-                      className={`h-full bg-slate-900/60 border rounded-2xl p-4 flex items-center justify-between gap-4 ${
-                        isLeader ? 'leader-glow border-yellow-500/50' : 'border-pink-500/10'
+                      className={`h-full bg-slate-900/60 border rounded-3xl p-5 flex items-center justify-between gap-5 ${
+                        isLeader ? 'leader-glow border-yellow-500/50 shadow-[0_0_20px_rgba(234,179,8,0.15)]' : 'border-pink-500/10'
                       }`}
                     >
                       {/* Left: Rank Badge */}
-                      <div className="flex flex-col items-center justify-center flex-shrink-0 min-w-[28px]">
+                      <div className="flex flex-col items-center justify-center flex-shrink-0 min-w-[40px]">
                         {isLeader ? (
-                          <span className="text-yellow-400 text-xl animate-bounce" title="Leader">👑</span>
+                          <span className="text-yellow-400 text-2xl animate-bounce mb-1" title="Leader">👑</span>
                         ) : null}
                         <span
-                          className={`font-black font-orbitron text-base ${
-                            isLeader ? 'text-yellow-400 font-extrabold' : 'text-gray-500'
+                          className={`font-black font-orbitron text-xl ${
+                            isLeader ? 'text-yellow-400 font-black' : 'text-gray-500'
                           }`}
                         >
                           #{idx + 1}
@@ -327,7 +327,7 @@ export default function MobileResults() {
                       </div>
 
                       {/* Photo */}
-                      <div className="w-[60px] h-[60px] rounded-xl overflow-hidden border border-pink-500/20 bg-slate-950/80 flex-shrink-0 relative">
+                      <div className="w-[75px] h-[75px] rounded-2xl overflow-hidden border-2 border-pink-500/20 bg-slate-950/80 flex-shrink-0 relative shadow-[0_4px_10px_rgba(0,0,0,0.3)]">
                         <img
                           src={cand.photo}
                           alt={cand.name}
@@ -337,7 +337,7 @@ export default function MobileResults() {
                             target.style.display = 'none';
                             const parent = target.parentElement;
                             if (parent) {
-                              parent.innerHTML = `<div class="w-full h-full flex items-center justify-center text-xl bg-pink-950/30">${cand.symbol}</div>`;
+                              parent.innerHTML = `<div class="w-full h-full flex items-center justify-center text-2xl bg-pink-950/30">${cand.symbol}</div>`;
                             }
                           }}
                         />
@@ -345,20 +345,20 @@ export default function MobileResults() {
 
                       {/* Details */}
                       <div className="flex-1 min-w-0">
-                        <h4 className="font-extrabold text-base uppercase tracking-wide truncate text-gray-100 font-orbitron mb-1">
+                        <h4 className="font-black text-xl uppercase tracking-wide truncate text-gray-100 font-orbitron mb-1.5 leading-none">
                           {cand.name}
                         </h4>
-                        <div className="flex items-center gap-2">
+                        <div className="flex items-center gap-2.5">
                           {cand.symbolImage ? (
                             <img
                               src={cand.symbolImage}
                               alt={cand.symbolLabel}
-                              className="w-8 h-8 rounded-full border border-pink-500/40 object-cover"
+                              className="w-[45px] h-[45px] rounded-full border-2 border-pink-500/40 object-cover bg-slate-950"
                             />
                           ) : (
                             <span className="text-xs">{cand.symbol}</span>
                           )}
-                          <span className="text-[11px] font-bold text-pink-400 font-rajdhani uppercase tracking-wider">
+                          <span className="text-[12px] font-extrabold text-pink-400 font-rajdhani uppercase tracking-widest">
                             {cand.symbolLabel}
                           </span>
                         </div>
@@ -366,13 +366,13 @@ export default function MobileResults() {
 
                       {/* Right: Votes Counter */}
                       <div className="text-right flex-shrink-0 pl-2">
-                        <div className={`font-black font-orbitron text-3xl ${
+                        <div className={`font-black font-orbitron text-4xl leading-none ${
                           isLeader ? 'text-yellow-400' : 'text-pink-400'
                         }`}>
                           {cand.votes}
                         </div>
-                        <div className="text-[9px] font-bold text-gray-500 font-orbitron uppercase tracking-wider">
-                          votes
+                        <div className="text-[10px] font-black text-gray-500 font-orbitron uppercase tracking-widest mt-1">
+                          VOTES
                         </div>
                       </div>
                     </div>
@@ -383,33 +383,60 @@ export default function MobileResults() {
           </section>
 
           {/* ================= CURRENT LEADERS SECTION ================= */}
-          <section className="bg-[#030917]/90 border border-cyan-900/40 rounded-2xl p-5 shadow-[0_4px_20px_rgba(0,0,0,0.4)] mt-8 mb-6">
-            <div className="text-center font-black uppercase text-xs tracking-widest text-yellow-400 font-orbitron mb-4 flex items-center justify-center gap-1.5">
+          <section className="bg-[#040e24]/90 border-2 border-yellow-500/70 rounded-3xl p-6 shadow-[0_0_30px_rgba(234,179,8,0.25)] mt-10 mb-8 leader-glow">
+            <div className="text-center font-black uppercase text-sm tracking-widest text-yellow-400 font-orbitron mb-6 flex items-center justify-center gap-2">
               <span>🏆</span> CURRENT LEADERS <span>🏆</span>
             </div>
             
-            <div className="flex items-center justify-between text-sm font-medium gap-4">
-              <div className="flex items-center gap-2.5 truncate max-w-[50%] flex-1">
-                <span className="text-cyan-400 text-lg">👑</span>
-                <div>
-                  <div className="text-gray-500 text-[9px] font-orbitron uppercase tracking-widest">Head Boy</div>
-                  <div className="font-extrabold text-white text-base truncate uppercase font-orbitron tracking-wide">
-                    {leadBoy ? leadBoy.name.split(' ')[0] : 'NO LEADER'}
-                  </div>
+            <div className="flex flex-row gap-6 justify-between items-stretch">
+              
+              {/* Head Boy Column */}
+              <div className="flex-1 flex flex-col items-center text-center p-4 rounded-2xl bg-cyan-950/20 border border-cyan-500/10 min-w-0">
+                <div className="text-[10px] font-black text-cyan-400 font-orbitron uppercase tracking-widest mb-3">
+                  🏆 Head Boy Leader
                 </div>
+                {leadBoy ? (
+                  <>
+                    <div className="w-[70px] h-[70px] rounded-2xl overflow-hidden border-2 border-yellow-500/50 bg-slate-950 mb-3 shadow-[0_0_15px_rgba(234,179,8,0.2)] flex-shrink-0">
+                      <img src={leadBoy.photo} alt={leadBoy.name} className="w-full h-full object-cover object-top" />
+                    </div>
+                    <div className="font-extrabold text-base text-white uppercase font-orbitron tracking-wide truncate max-w-full mb-1">
+                      {leadBoy.name.split(' ')[0]}
+                    </div>
+                    <div className="font-black text-2xl text-cyan-400 font-orbitron">
+                      {leadBoy.votes} <span className="text-[10px] font-bold text-gray-500 uppercase tracking-widest">votes</span>
+                    </div>
+                  </>
+                ) : (
+                  <span className="text-xs text-gray-500 uppercase font-orbitron">No Data</span>
+                )}
               </div>
 
-              <div className="h-8 w-px bg-cyan-900/40 flex-shrink-0" />
+              {/* Divider */}
+              <div className="w-px bg-yellow-500/20 flex-shrink-0" />
 
-              <div className="flex items-center gap-2.5 truncate max-w-[50%] flex-1 justify-end text-right">
-                <div>
-                  <div className="text-gray-500 text-[9px] font-orbitron uppercase tracking-widest">Head Girl</div>
-                  <div className="font-extrabold text-white text-base truncate uppercase font-orbitron tracking-wide">
-                    {leadGirl ? leadGirl.name.split(' ')[0] : 'NO LEADER'}
-                  </div>
+              {/* Head Girl Column */}
+              <div className="flex-1 flex flex-col items-center text-center p-4 rounded-2xl bg-pink-950/20 border border-pink-500/10 min-w-0">
+                <div className="text-[10px] font-black text-pink-400 font-orbitron uppercase tracking-widest mb-3">
+                  🏆 Head Girl Leader
                 </div>
-                <span className="text-pink-400 text-lg">👑</span>
+                {leadGirl ? (
+                  <>
+                    <div className="w-[70px] h-[70px] rounded-2xl overflow-hidden border-2 border-yellow-500/50 bg-slate-950 mb-3 shadow-[0_0_15px_rgba(234,179,8,0.2)] flex-shrink-0">
+                      <img src={leadGirl.photo} alt={leadGirl.name} className="w-full h-full object-cover object-top" />
+                    </div>
+                    <div className="font-extrabold text-base text-white uppercase font-orbitron tracking-wide truncate max-w-full mb-1">
+                      {leadGirl.name.split(' ')[0]}
+                    </div>
+                    <div className="font-black text-2xl text-pink-400 font-orbitron">
+                      {leadGirl.votes} <span className="text-[10px] font-bold text-gray-500 uppercase tracking-widest">votes</span>
+                    </div>
+                  </>
+                ) : (
+                  <span className="text-xs text-gray-500 uppercase font-orbitron">No Data</span>
+                )}
               </div>
+
             </div>
           </section>
 
