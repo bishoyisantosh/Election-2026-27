@@ -409,7 +409,7 @@ const AdminDashboard = () => {
 
                   {/* Photo */}
                   <div
-                    className="w-12 h-14 rounded-lg overflow-hidden border border-cyan-500/30 flex-shrink-0"
+                    className="w-14 h-16 rounded-lg overflow-hidden border border-cyan-500/30 flex-shrink-0"
                   >
                     <img
                       src={cand.photo}
@@ -420,22 +420,22 @@ const AdminDashboard = () => {
 
                   {/* Name & Progress bar */}
                   <div className="flex-1 min-w-0">
-                    <div className="flex items-center justify-between mb-1">
-                      <span className="font-bold text-sm uppercase tracking-wider truncate font-orbitron text-cyan-100">
+                    <div className="flex items-center justify-between mb-1.5">
+                      <span className="font-extrabold text-lg uppercase tracking-wider truncate font-orbitron text-cyan-100">
                         {cand.name}
                       </span>
                       {cand.symbolImage ? (
                         <img
                           src={cand.symbolImage}
                           alt={cand.symbolLabel}
-                          className="w-6 h-6 rounded-full border border-cyan-500/40"
+                          className="w-12 h-12 rounded-full border-2 border-cyan-500/40 object-cover"
                         />
                       ) : (
-                        <span className="text-sm">{cand.symbol}</span>
+                        <span className="text-2xl">{cand.symbol}</span>
                       )}
                     </div>
                     {/* Progress bar container */}
-                    <div className="w-full h-2 rounded-full bg-cyan-950/40 overflow-hidden border border-cyan-500/10">
+                    <div className="w-full h-2.5 rounded-full bg-cyan-950/40 overflow-hidden border border-cyan-500/10">
                       <div
                         className="h-full bg-gradient-to-r from-cyan-600 to-cyan-400 rounded-full shadow-[0_0_8px_rgba(0,180,255,0.7)]"
                         style={{ width: `${percentageOfVotes}%`, transition: 'width 0.8s ease-out' }}
@@ -444,12 +444,12 @@ const AdminDashboard = () => {
                   </div>
 
                   {/* Votes Count */}
-                  <div className="text-right flex-shrink-0">
-                    <div className="text-cyan-400 font-black text-lg font-orbitron">
+                  <div className="text-right flex-shrink-0 pl-2">
+                    <div className="text-cyan-400 font-black text-3xl font-orbitron">
                       {cand.votes}
                     </div>
-                    <div className="text-gray-500 text-[0.6rem] uppercase tracking-wider font-orbitron">
-                      {percentageOfVotes}% of votes
+                    <div className="text-gray-500 text-[0.7rem] uppercase tracking-wider font-orbitron mt-0.5">
+                      {percentageOfVotes}%
                     </div>
                   </div>
                 </div>
@@ -486,7 +486,7 @@ const AdminDashboard = () => {
 
                   {/* Photo */}
                   <div
-                    className="w-12 h-14 rounded-lg overflow-hidden border border-pink-500/30 flex-shrink-0"
+                    className="w-14 h-16 rounded-lg overflow-hidden border border-pink-500/30 flex-shrink-0"
                   >
                     <img
                       src={cand.photo}
@@ -497,22 +497,22 @@ const AdminDashboard = () => {
 
                   {/* Name & Progress bar */}
                   <div className="flex-1 min-w-0">
-                    <div className="flex items-center justify-between mb-1">
-                      <span className="font-bold text-sm uppercase tracking-wider truncate font-orbitron text-pink-100">
+                    <div className="flex items-center justify-between mb-1.5">
+                      <span className="font-extrabold text-lg uppercase tracking-wider truncate font-orbitron text-pink-100">
                         {cand.name}
                       </span>
                       {cand.symbolImage ? (
                         <img
                           src={cand.symbolImage}
                           alt={cand.symbolLabel}
-                          className="w-6 h-6 rounded-full border border-pink-500/40"
+                          className="w-12 h-12 rounded-full border-2 border-pink-500/40 object-cover"
                         />
                       ) : (
-                        <span className="text-sm">{cand.symbol}</span>
+                        <span className="text-2xl">{cand.symbol}</span>
                       )}
                     </div>
                     {/* Progress bar container */}
-                    <div className="w-full h-2 rounded-full bg-pink-950/40 overflow-hidden border border-pink-500/10">
+                    <div className="w-full h-2.5 rounded-full bg-pink-950/40 overflow-hidden border border-pink-500/10">
                       <div
                         className="h-full bg-gradient-to-r from-pink-600 to-pink-400 rounded-full shadow-[0_0_8px_rgba(255,60,180,0.7)]"
                         style={{ width: `${percentageOfVotes}%`, transition: 'width 0.8s ease-out' }}
@@ -521,12 +521,12 @@ const AdminDashboard = () => {
                   </div>
 
                   {/* Votes Count */}
-                  <div className="text-right flex-shrink-0">
-                    <div className="text-pink-400 font-black text-lg font-orbitron">
+                  <div className="text-right flex-shrink-0 pl-2">
+                    <div className="text-pink-400 font-black text-3xl font-orbitron">
                       {cand.votes}
                     </div>
-                    <div className="text-gray-500 text-[0.6rem] uppercase tracking-wider font-orbitron">
-                      {percentageOfVotes}% of votes
+                    <div className="text-gray-500 text-[0.7rem] uppercase tracking-wider font-orbitron mt-0.5">
+                      {percentageOfVotes}%
                     </div>
                   </div>
                 </div>
