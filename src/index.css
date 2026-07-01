@@ -13,6 +13,17 @@
     overflow: hidden;
   }
 
+  /* Helper overrides for scrollable routes (e.g. mobile results) */
+  html.scrollable-page,
+  body.scrollable-page,
+  body.scrollable-page #root {
+    height: auto !important;
+    min-height: 100vh !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+
   body {
     font-family: 'Inter', 'Rajdhani', sans-serif;
     background: #020818;

@@ -5,6 +5,7 @@ import PanelSection from './components/PanelSection';
 import ConfirmModal from './components/ConfirmModal';
 import SuccessOverlay from './components/SuccessOverlay';
 import AdminDashboard from './components/AdminDashboard';
+import MobileResults from './components/MobileResults';
 import { db } from './firebase';
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 
@@ -472,6 +473,7 @@ function App() {
     <Routes>
       <Route path="/" element={<StudentVoting />} />
       <Route path="/admin" element={<AdminDashboard />} />
+      <Route path="/mobile" element={<MobileResults />} />
     </Routes>
   );
 }
