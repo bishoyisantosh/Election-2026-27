@@ -67,15 +67,6 @@ export const GIRL_CANDIDATES: Candidate[] = [
     symbolImage: '/images/udaan.jpg',
     photo: '/images/siddhi.jpg',
   },
-  {
-    id: 4,
-    serialNo: 4,
-    name: 'Tisha Kaklotar',
-    symbol: '🌟',
-    symbolLabel: 'Prarambh',
-    symbolImage: '/images/prarambh.jpg',
-    photo: '/images/tisha.jpg',
-  },
 ];
 
 export const SCHOOL_INFO = {

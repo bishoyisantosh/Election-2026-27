@@ -16,7 +16,6 @@ function StudentVoting() {
   const [showModal, setShowModal] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
   const [notification, setNotification] = useState<string | null>(null);
-  const [votesCast, setVotesCast] = useState(0);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const selectedBoy = BOY_CANDIDATES.find((c) => c.id === boyVote) || null;
@@ -137,7 +136,6 @@ function StudentVoting() {
       playSubmitBeep();
       setShowModal(false);
       setShowSuccess(true);
-      setVotesCast((prev) => prev + 1);
     } catch (error) {
       console.error("Firestore submit error: ", error);
       const errMsg = error instanceof Error ? error.message : String(error);
@@ -346,51 +344,8 @@ function StudentVoting() {
         />
 
         <div className="flex items-center justify-between gap-4">
-          {/* Left: Votes Cast Counter */}
-          <div
-            className="flex items-center gap-3 px-4 py-2 rounded-xl flex-shrink-0"
-            style={{
-              background: 'rgba(0,20,60,0.8)',
-              border: '1px solid rgba(0,150,255,0.3)',
-              boxShadow: '0 0 15px rgba(0,80,200,0.2)',
-              minWidth: '200px',
-            }}
-          >
-            <div
-              className="text-3xl"
-              style={{ filter: 'drop-shadow(0 0 8px rgba(0,200,255,0.5))' }}
-            >
-              🗳️
-            </div>
-            <div>
-              <div className="text-gray-400 uppercase tracking-widest" style={{ fontFamily: 'Orbitron', fontSize: '0.55rem' }}>
-                Votes Cast
-              </div>
-              <div
-                key={votesCast}
-                className="font-black glow-text-blue"
-                style={{
-                  fontFamily: 'Orbitron',
-                  fontSize: '1.6rem',
-                  lineHeight: 1,
-                  color: votesCast === 0 ? '#4a6080' : '#00d4ff',
-                  animation: votesCast > 0 ? 'successPop 0.4s cubic-bezier(0.23,1,0.32,1)' : 'none',
-                  textShadow: votesCast > 0
-                    ? '0 0 20px rgba(0,212,255,0.9), 0 0 40px rgba(0,150,255,0.5)'
-                    : 'none',
-                  transition: 'color 0.3s ease',
-                }}
-              >
-                {String(votesCast).padStart(4, '0')}
-              </div>
-              <div
-                className="uppercase tracking-widest"
-                style={{ fontFamily: 'Orbitron', fontSize: '0.45rem', color: '#4a6080', marginTop: '1px' }}
-              >
-                of {SCHOOL_INFO.totalStudents.toLocaleString()} students
-              </div>
-            </div>
-          </div>
+          {/* Left Spacer to keep layout centered */}
+          <div className="flex-shrink-0" style={{ minWidth: '180px' }} />
 
           {/* Center: CONFIRM VOTE button */}
           <div className="flex flex-col items-center gap-1.5 flex-1">
