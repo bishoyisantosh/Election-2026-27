@@ -19,6 +19,9 @@ const AdminDashboard = () => {
   const [errorMsg, setErrorMsg] = useState('');
   const [votes, setVotes] = useState<VoteDoc[]>([]);
   const [lastVote, setLastVote] = useState<VoteDoc | null>(null);
+  const [showResetModal, setShowResetModal] = useState(false);
+  const [resetPassword, setResetPassword] = useState('');
+  const [resetError, setResetError] = useState('');
 
   // Password submission handler
   const handleLoginSubmit = (e: React.FormEvent) => {
@@ -100,12 +103,20 @@ const AdminDashboard = () => {
   };
 
   // Reset Election function
-  const handleResetElection = async () => {
-    const confirmFirst = window.confirm("⚠️ WARNING: This will permanently delete ALL recorded votes from Firestore and reset all statistics to zero. This action CANNOT be undone!\n\nAre you sure you want to proceed?");
-    if (!confirmFirst) return;
+  const triggerResetClick = () => {
+    setResetPassword('');
+    setResetError('');
+    setShowResetModal(true);
+  };
 
-    const confirmSecond = window.confirm("⚠️ FINAL CONFIRMATION: Are you absolutely sure? All live voting results will be wiped out.");
-    if (!confirmSecond) return;
+  const handleResetElection = async () => {
+    if (resetPassword !== '8200653866') {
+      setResetError('❌ Incorrect password. Access Denied!');
+      return;
+    }
+
+    const confirmWipe = window.confirm("⚠️ WARNING: This will permanently delete ALL recorded votes from Firestore and reset all statistics to zero. This action CANNOT be undone!\n\nAre you sure you want to proceed?");
+    if (!confirmWipe) return;
 
     try {
       const votesColRef = collection(db, 'votes');
@@ -113,6 +124,7 @@ const AdminDashboard = () => {
       
       if (querySnapshot.empty) {
         alert("ℹ️ Information: No votes found to delete.");
+        setShowResetModal(false);
         return;
       }
 
@@ -126,6 +138,8 @@ const AdminDashboard = () => {
     } catch (error) {
       console.error("Error resetting election: ", error);
       alert(`❌ Failed to reset election: ${error instanceof Error ? error.message : String(error)}`);
+    } finally {
+      setShowResetModal(false);
     }
   };
 
@@ -304,7 +318,7 @@ const AdminDashboard = () => {
               📊 Export to Excel
             </button>
             <button
-              onClick={handleResetElection}
+              onClick={triggerResetClick}
               className="px-4 py-2 rounded-lg font-bold text-xs uppercase tracking-wider transition-all hover:scale-105 border bg-rose-950/40 border-rose-500/40 text-rose-400 shadow-[0_0_15px_rgba(244,63,94,0.2)] flex items-center gap-1.5 cursor-pointer mr-2"
             >
               🗑️ Reset Election
@@ -562,6 +576,65 @@ const AdminDashboard = () => {
           </div>
         </div>
       </footer>
+
+      {showResetModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md p-4">
+          <div className="bg-slate-900 border-2 border-rose-500/40 rounded-3xl p-8 max-w-md w-full shadow-[0_0_50px_rgba(244,63,94,0.25)] relative text-center">
+            {/* Neon line */}
+            <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-rose-600 to-rose-400 rounded-t-3xl" />
+            
+            <div className="w-14 h-14 rounded-2xl bg-rose-950/50 border border-rose-500/50 flex items-center justify-center text-2xl mx-auto mb-4">
+              ⚠️
+            </div>
+
+            <h3 className="text-white font-black uppercase tracking-widest text-lg mb-2 font-orbitron">
+              Reset Verification
+            </h3>
+            
+            <p className="text-gray-400 text-xs font-medium font-inter mb-6">
+              Enter safety password to authorize wiping all recorded votes.
+            </p>
+
+            <div className="space-y-4">
+              <input
+                type="password"
+                placeholder="••••••••"
+                value={resetPassword}
+                onChange={(e) => {
+                  setResetPassword(e.target.value);
+                  setResetError('');
+                }}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter') handleResetElection();
+                }}
+                className="w-full px-4 py-3 rounded-xl text-center text-white tracking-widest font-bold placeholder-gray-600 border border-rose-500/30 bg-black/40 focus:outline-none focus:border-rose-400 focus:shadow-[0_0_15px_rgba(244,63,94,0.3)] font-orbitron text-sm"
+                autoFocus
+              />
+              
+              {resetError && (
+                <div className="text-xs font-bold font-inter text-rose-400">
+                  {resetError}
+                </div>
+              )}
+
+              <div className="flex gap-4 mt-6">
+                <button
+                  onClick={() => setShowResetModal(false)}
+                  className="flex-1 py-3 rounded-xl border border-gray-700 bg-gray-800/40 hover:bg-gray-800 text-gray-400 font-bold text-xs uppercase tracking-wider transition-all cursor-pointer font-orbitron"
+                >
+                  Cancel
+                </button>
+                <button
+                  onClick={handleResetElection}
+                  className="flex-1 py-3 rounded-xl bg-gradient-to-r from-rose-600 to-rose-500 hover:from-rose-500 hover:to-rose-400 text-white font-black text-xs uppercase tracking-wider transition-all cursor-pointer shadow-[0_0_20px_rgba(244,63,94,0.3)] font-orbitron"
+                >
+                  Confirm Reset
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
