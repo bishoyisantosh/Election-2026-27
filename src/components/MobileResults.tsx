@@ -197,6 +197,64 @@ export default function MobileResults() {
         {/* ================= SECTIONS ================= */}
         <main className="flex-1 px-4 py-4 space-y-6">
           
+          {/* ================= CURRENT LEADERS SECTION ================= */}
+          <section className="bg-[#040e24]/90 border-2 border-yellow-500/70 rounded-3xl p-6 shadow-[0_0_30px_rgba(234,179,8,0.25)] mt-2 mb-6 leader-glow">
+            <div className="text-center font-black uppercase text-sm tracking-widest text-yellow-400 font-orbitron mb-6 flex items-center justify-center gap-2">
+              <span>🏆</span> CURRENT LEADERS <span>🏆</span>
+            </div>
+            
+            <div className="flex flex-row gap-6 justify-between items-stretch">
+              
+              {/* Head Boy Column */}
+              <div className="flex-1 flex flex-col items-center text-center p-4 rounded-2xl bg-cyan-950/20 border border-cyan-500/10 min-w-0">
+                <div className="text-[10px] font-black text-cyan-400 font-orbitron uppercase tracking-widest mb-3">
+                  🏆 Head Boy Leader
+                </div>
+                {leadBoy ? (
+                  <>
+                    <div className="w-[70px] h-[70px] rounded-2xl overflow-hidden border-2 border-yellow-500/50 bg-slate-950 mb-3 shadow-[0_0_15px_rgba(234,179,8,0.2)] flex-shrink-0">
+                      <img src={leadBoy.photo} alt={leadBoy.name} className="w-full h-full object-cover object-top" />
+                    </div>
+                    <div className="font-extrabold text-base text-white uppercase font-orbitron tracking-wide truncate max-w-full mb-1">
+                      {leadBoy.name.split(' ')[0]}
+                    </div>
+                    <div className="font-black text-2xl text-cyan-400 font-orbitron">
+                      {leadBoy.votes} <span className="text-[10px] font-bold text-gray-500 uppercase tracking-widest">votes</span>
+                    </div>
+                  </>
+                ) : (
+                  <span className="text-xs text-gray-500 uppercase font-orbitron">No Data</span>
+                )}
+              </div>
+
+              {/* Divider */}
+              <div className="w-px bg-yellow-500/20 flex-shrink-0" />
+
+              {/* Head Girl Column */}
+              <div className="flex-1 flex flex-col items-center text-center p-4 rounded-2xl bg-pink-950/20 border border-pink-500/10 min-w-0">
+                <div className="text-[10px] font-black text-pink-400 font-orbitron uppercase tracking-widest mb-3">
+                  🏆 Head Girl Leader
+                </div>
+                {leadGirl ? (
+                  <>
+                    <div className="w-[70px] h-[70px] rounded-2xl overflow-hidden border-2 border-yellow-500/50 bg-slate-950 mb-3 shadow-[0_0_15px_rgba(234,179,8,0.2)] flex-shrink-0">
+                      <img src={leadGirl.photo} alt={leadGirl.name} className="w-full h-full object-cover object-top" />
+                    </div>
+                    <div className="font-extrabold text-base text-white uppercase font-orbitron tracking-wide truncate max-w-full mb-1">
+                      {leadGirl.name.split(' ')[0]}
+                    </div>
+                    <div className="font-black text-2xl text-pink-400 font-orbitron">
+                      {leadGirl.votes} <span className="text-[10px] font-bold text-gray-500 uppercase tracking-widest">votes</span>
+                    </div>
+                  </>
+                ) : (
+                  <span className="text-xs text-gray-500 uppercase font-orbitron">No Data</span>
+                )}
+              </div>
+
+            </div>
+          </section>
+
           {/* HEAD BOY SECTION */}
           <section>
             <h3 className="font-black uppercase tracking-wider text-xs font-orbitron text-cyan-400 flex items-center gap-1.5 mb-2 border-b border-cyan-950/40 pb-1.5">
@@ -381,65 +439,6 @@ export default function MobileResults() {
               })}
             </div>
           </section>
-
-          {/* ================= CURRENT LEADERS SECTION ================= */}
-          <section className="bg-[#040e24]/90 border-2 border-yellow-500/70 rounded-3xl p-6 shadow-[0_0_30px_rgba(234,179,8,0.25)] mt-10 mb-8 leader-glow">
-            <div className="text-center font-black uppercase text-sm tracking-widest text-yellow-400 font-orbitron mb-6 flex items-center justify-center gap-2">
-              <span>🏆</span> CURRENT LEADERS <span>🏆</span>
-            </div>
-            
-            <div className="flex flex-row gap-6 justify-between items-stretch">
-              
-              {/* Head Boy Column */}
-              <div className="flex-1 flex flex-col items-center text-center p-4 rounded-2xl bg-cyan-950/20 border border-cyan-500/10 min-w-0">
-                <div className="text-[10px] font-black text-cyan-400 font-orbitron uppercase tracking-widest mb-3">
-                  🏆 Head Boy Leader
-                </div>
-                {leadBoy ? (
-                  <>
-                    <div className="w-[70px] h-[70px] rounded-2xl overflow-hidden border-2 border-yellow-500/50 bg-slate-950 mb-3 shadow-[0_0_15px_rgba(234,179,8,0.2)] flex-shrink-0">
-                      <img src={leadBoy.photo} alt={leadBoy.name} className="w-full h-full object-cover object-top" />
-                    </div>
-                    <div className="font-extrabold text-base text-white uppercase font-orbitron tracking-wide truncate max-w-full mb-1">
-                      {leadBoy.name.split(' ')[0]}
-                    </div>
-                    <div className="font-black text-2xl text-cyan-400 font-orbitron">
-                      {leadBoy.votes} <span className="text-[10px] font-bold text-gray-500 uppercase tracking-widest">votes</span>
-                    </div>
-                  </>
-                ) : (
-                  <span className="text-xs text-gray-500 uppercase font-orbitron">No Data</span>
-                )}
-              </div>
-
-              {/* Divider */}
-              <div className="w-px bg-yellow-500/20 flex-shrink-0" />
-
-              {/* Head Girl Column */}
-              <div className="flex-1 flex flex-col items-center text-center p-4 rounded-2xl bg-pink-950/20 border border-pink-500/10 min-w-0">
-                <div className="text-[10px] font-black text-pink-400 font-orbitron uppercase tracking-widest mb-3">
-                  🏆 Head Girl Leader
-                </div>
-                {leadGirl ? (
-                  <>
-                    <div className="w-[70px] h-[70px] rounded-2xl overflow-hidden border-2 border-yellow-500/50 bg-slate-950 mb-3 shadow-[0_0_15px_rgba(234,179,8,0.2)] flex-shrink-0">
-                      <img src={leadGirl.photo} alt={leadGirl.name} className="w-full h-full object-cover object-top" />
-                    </div>
-                    <div className="font-extrabold text-base text-white uppercase font-orbitron tracking-wide truncate max-w-full mb-1">
-                      {leadGirl.name.split(' ')[0]}
-                    </div>
-                    <div className="font-black text-2xl text-pink-400 font-orbitron">
-                      {leadGirl.votes} <span className="text-[10px] font-bold text-gray-500 uppercase tracking-widest">votes</span>
-                    </div>
-                  </>
-                ) : (
-                  <span className="text-xs text-gray-500 uppercase font-orbitron">No Data</span>
-                )}
-              </div>
-
-            </div>
-          </section>
-
         </main>
 
       </div>
